@@ -1,0 +1,26 @@
+<md-toolbar class="search-input" color="primary" style="height: 64px;">
+
+  <button md-icon-button
+          aria-label="Back">
+    <md-icon>&#xE5C4;</md-icon>
+  </button>
+
+  <md-input-container #input fxFlex="auto">
+    <input mdInput
+           type="text"
+           [(ngModel)]="value"
+           [placeholder]="placeholder"
+           (blur)="handleBlur()"
+           (search)="stopPropagation($event)"
+           (keyup.enter)="handleSearch($event)"/>
+
+  </md-input-container>
+  <button md-icon-button
+          aria-label="Cancel"
+          [@searchState]="(value ?  'show' :  'hide-right')"
+          (click)="clearSearch()">
+    <md-icon>cancel</md-icon>
+  </button>
+
+
+</md-toolbar>
