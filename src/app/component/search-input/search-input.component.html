@@ -1,26 +1,32 @@
-<md-toolbar class="search-input" color="primary" style="height: 64px;">
+<md-toolbar>
+    <button md-icon-button
+            aria-label="Back">
+      <md-icon>arrow_back</md-icon>
+    </button>
 
-  <button md-icon-button
-          aria-label="Back">
-    <md-icon>&#xE5C4;</md-icon>
-  </button>
+    <md-input-container fxFlex>
+      <input mdInput
+             type="text"
+             [(ngModel)]="value"
+             [placeholder]="placeholder"
+             (blur)="handleBlur()"
+             (search)="stopPropagation($event)"
+             (keyup.enter)="handleSearch($event)"/>
+    </md-input-container>
+    <button md-icon-button
+            aria-label="Cancel"
+            [@searchState]="(value ? 'show' : 'hide-right')"
+            (click)="clearSearch()">
+      <md-icon>cancel</md-icon>
+    </button>
+  <md-toolbar-row>
 
-  <md-input-container #input fxFlex="auto">
-    <input mdInput
-           type="text"
-           [(ngModel)]="value"
-           [placeholder]="placeholder"
-           (blur)="handleBlur()"
-           (search)="stopPropagation($event)"
-           (keyup.enter)="handleSearch($event)"/>
-
-  </md-input-container>
-  <button md-icon-button
-          aria-label="Cancel"
-          [@searchState]="(value ?  'show' :  'hide-right')"
-          (click)="clearSearch()">
-    <md-icon>cancel</md-icon>
-  </button>
-
-
+    <!--<h1>You entered: {{value}}</h1>-->
+    <md-tab-group md-stretch-tabs fxFlex>
+      <md-tab label="Tab1" aria-controls="tab1-content">
+      </md-tab>
+      <md-tab label="Tab2" aria-controls="tab2-content">
+      </md-tab>
+    </md-tab-group>
+  </md-toolbar-row>
 </md-toolbar>

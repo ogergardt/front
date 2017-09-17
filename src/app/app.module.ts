@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { MaterialModule} from '@angular/material';
+import { MaterialModule} from './material/material.module';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
@@ -33,9 +33,9 @@ import { SearchInputComponent } from './component/search-input/search-input.comp
   ],
   imports: [
     BrowserModule,
-    MaterialModule,
     FlexLayoutModule,
     CommonModule,
+    MaterialModule,
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
@@ -49,7 +49,9 @@ import { SearchInputComponent } from './component/search-input/search-input.comp
   exports: [
     CommonModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MaterialModule
+
   ],
   bootstrap: [AppComponent]
 })

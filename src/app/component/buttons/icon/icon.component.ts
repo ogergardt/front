@@ -5,7 +5,7 @@ import { MdIconRegistry } from '@angular/material';
 @Component({
   selector: 'app-icon',
   templateUrl: './icon.component.html',
-  styleUrls: ['./icon.component.scss']
+  styleUrls: ['./icon.component.css']
 })
 export class IconComponent implements OnInit {
 
