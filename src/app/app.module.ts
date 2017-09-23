@@ -9,7 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './component/header/header.component';
+import { HeaderComponent } from './header/header.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
@@ -18,8 +18,7 @@ import { AuthService } from './services/auth.service';
 import { AlertService } from './services/alert.service';
 import { AppRouting } from './app.routing';
 import { IconComponent } from './component/buttons/icon/icon.component';
-import { SearchInputComponent } from './component/search-input/search-input.component';
-
+import { ContentComponent } from './content/content.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +28,7 @@ import { SearchInputComponent } from './component/search-input/search-input.comp
     HomeComponent,
     RegisterComponent,
     IconComponent,
-    SearchInputComponent,
+    ContentComponent,
   ],
   imports: [
     BrowserModule,

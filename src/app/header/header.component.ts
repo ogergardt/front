@@ -3,11 +3,13 @@ import {trigger, state, style, transition, animate} from '@angular/animations';
 import {MdInput} from '@angular/material';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/skip';
+import {NgSwitch} from '@angular/common';
+import {Job} from '../model/job.model';
 
 @Component({
-  selector: 'app-search-input',
-  templateUrl: './search-input.component.html',
-  styleUrls: ['./search-input.component.css'],
+  selector: 'app-header',
+  templateUrl: './header.component.html',
+  styleUrls: ['./header.component.css'],
   animations: [
     trigger('searchState', [
       state('hide-left', style({
@@ -27,7 +29,8 @@ import 'rxjs/add/operator/skip';
     ]),
   ],
 })
-export class SearchInputComponent implements OnInit {
+
+export class HeaderComponent implements OnInit {
 
   @ViewChild(MdInput) private input: MdInput;
 
@@ -45,13 +48,15 @@ export class SearchInputComponent implements OnInit {
 
   @Output('blur') blur: EventEmitter<void> = new EventEmitter<void>();
 
+  // @Output('selectedIndexChange') selectedIndexChange: EventEmitter<number> = new EventEmitter<number>();
+
 
   constructor() {
   }
 
   ngOnInit(): void {
     this.input.ngControl.valueChanges
-      .skip(10) // skip first change when value is set to undefined
+      .skip(1) // skip first change when value is set to undefined
       .debounceTime(this.debounce)
       .subscribe((value: string) => {
         this.searchDebounce.emit(value);
@@ -75,6 +80,5 @@ export class SearchInputComponent implements OnInit {
     this.value = '';
     this.clear.emit(undefined);
   }
-
 
 }
