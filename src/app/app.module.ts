@@ -16,6 +16,7 @@ import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
 import { AuthService } from './services/auth.service';
 import { AlertService } from './services/alert.service';
+import { JobService } from './services/job.service';
 import { AppRouting } from './app.routing';
 import { IconComponent } from './component/buttons/icon/icon.component';
 import { ContentComponent } from './content/content.component';
@@ -43,7 +44,8 @@ import { ContentComponent } from './content/content.component';
   ],
   providers: [
     AuthService,
-    AlertService
+    AlertService,
+    JobService,
   ],
   exports: [
     CommonModule,
