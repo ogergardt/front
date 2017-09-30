@@ -1,10 +1,9 @@
-import {Component, ViewChild, OnInit, Input, Output, EventEmitter} from '@angular/core';
+import {Component, ViewChild, AfterViewInit, Input, Output, EventEmitter} from '@angular/core';
 import {trigger, state, style, transition, animate} from '@angular/animations';
 import {MdInput} from '@angular/material';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/skip';
 import {NgSwitch} from '@angular/common';
-import {Job} from '../model/job.model';
 
 @Component({
   selector: 'app-header',
@@ -30,11 +29,13 @@ import {Job} from '../model/job.model';
   ],
 })
 
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements AfterViewInit {
 
-  @ViewChild(MdInput) private input: MdInput;
+  @ViewChild(MdInput) private _searchInput: MdInput;
 
-  value: string;
+  value: string = '';
+
+  showSearch: boolean = false;
 
   @Input('debounce') debounce = 400;
 
@@ -54,13 +55,15 @@ export class HeaderComponent implements OnInit {
   constructor() {
   }
 
-  ngOnInit(): void {
-    this.input.ngControl.valueChanges
-      .skip(1) // skip first change when value is set to undefined
-      .debounceTime(this.debounce)
-      .subscribe((value: string) => {
-        this.searchDebounce.emit(value);
-      });
+  ngAfterViewInit(): void {
+    if (this._searchInput) {
+
+      this._searchInput.ngControl.valueChanges
+        .debounceTime(this.debounce)
+        .subscribe((value: string) => {
+          this.searchDebounce.emit(value);
+        });
+    }
   }
 
   handleBlur(): void {

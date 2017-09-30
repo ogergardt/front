@@ -1,26 +1,31 @@
-<!--<button md-icon-button [mdMenuTriggerFor]="" >-->
-<!--<md-icon>menu</md-icon>-->
-<!--</button>-->
+<md-toolbar *ngIf="!showSearch">
+  <!--<button md-icon-button [mdMenuTriggerFor]="">-->
+  <button md-icon-button>
+    <md-icon>menu</md-icon>
+  </button>
 
-<!--<span style="flex:1 1 auto;" fxFlexOffset="20px">LOGO</span>-->
+  <span fxFlex fxFlexOffset="20px">LOGO</span>
 
-
-
-<!--<button md-icon-button [mdMenuTriggerFor]="search">-->
-<!--<md-icon>search</md-icon>-->
-<!--</button>-->
-
-<!--<button md-icon-button [mdMenuTriggerFor]="">-->
-<!--<md-icon>more_vert</md-icon>-->
-<!--</button>-->
-
-<md-toolbar>
   <button md-icon-button
-          aria-label="Back">
+          aria-label="Search"
+          (click)="showSearch = !showSearch">
+    <md-icon>search</md-icon>
+  </button>
+
+  <!--<button md-icon-button [mdMenuTriggerFor]="">-->
+  <button md-icon-button>
+    <md-icon>more_vert</md-icon>
+  </button>
+</md-toolbar>
+
+<md-toolbar *ngIf="showSearch">
+  <button md-icon-button
+          aria-label="Back"
+          (click)="showSearch = !showSearch">
     <md-icon>arrow_back</md-icon>
   </button>
 
-  <md-input-container fxFlex>
+  <md-form-field fxFlex>
     <input mdInput
            type="text"
            [(ngModel)]="value"
@@ -28,7 +33,7 @@
            (blur)="handleBlur()"
            (search)="stopPropagation($event)"
            (keyup.enter)="handleSearch($event)"/>
-  </md-input-container>
+  </md-form-field>
   <button md-icon-button
           aria-label="Cancel"
           [@searchState]="(value ? 'show' : 'hide-right')"
@@ -36,5 +41,7 @@
     <md-icon>cancel</md-icon>
   </button>
 </md-toolbar>
+
+
 
 
