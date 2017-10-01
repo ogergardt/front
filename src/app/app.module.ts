@@ -6,7 +6,6 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
-
 import {AppComponent} from './app.component';
 import {HeaderComponent} from './header/header.component';
 import {FlexLayoutModule} from '@angular/flex-layout';
@@ -19,7 +18,6 @@ import {JobService} from './services/job.service';
 import {AppRouting} from './app.routing';
 import {IconComponent} from './component/buttons/icon/icon.component';
 import {ContentComponent} from './content/content.component';
-import {AutofocusDirective} from './shared/autofocus.directive';
 
 @NgModule({
   declarations: [
@@ -30,7 +28,6 @@ import {AutofocusDirective} from './shared/autofocus.directive';
     RegisterComponent,
     IconComponent,
     ContentComponent,
-    AutofocusDirective,
   ],
   imports: [
     BrowserModule,

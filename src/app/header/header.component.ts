@@ -61,6 +61,7 @@ export class HeaderComponent implements AfterViewInit {
       this._searchInput.ngControl.valueChanges
         .debounceTime(this.debounce)
         .subscribe((value: string) => {
+          console.log(value);
           this.searchDebounce.emit(value);
         });
     }

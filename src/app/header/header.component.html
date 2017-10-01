@@ -1,19 +1,24 @@
 <md-toolbar *ngIf="!showSearch">
-  <!--<button md-icon-button [mdMenuTriggerFor]="">-->
   <button md-icon-button>
     <md-icon>menu</md-icon>
   </button>
 
   <span fxFlex fxFlexOffset="20px">LOGO</span>
 
+  <div fxLayout="row" fxShow="false" fxShow.gt-sm>
+    <button md-button routerLink="/search">Search</button>
+    <button md-button routerLink="/login">Sing in</button>
+    <button md-button routerLink="/register">Sign up</button>
+  </div>
+
   <button md-icon-button
           aria-label="Search"
-          (click)="showSearch = !showSearch">
+          (click)="showSearch = !showSearch"
+          fxHide="false" fxHide.gt-sm>
     <md-icon>search</md-icon>
   </button>
 
-  <!--<button md-icon-button [mdMenuTriggerFor]="">-->
-  <button md-icon-button>
+  <button md-icon-button [mdMenuTriggerFor]="menu" fxHide="false" fxHide.gt-sm>
     <md-icon>more_vert</md-icon>
   </button>
 </md-toolbar>
@@ -42,6 +47,9 @@
   </button>
 </md-toolbar>
 
-
+<md-menu #menu="mdMenu">
+  <button md-menu-item routerLink="/login">Sign in</button>
+  <button md-menu-item routerLink="/register">Sign up</button>
+</md-menu>
 
 
