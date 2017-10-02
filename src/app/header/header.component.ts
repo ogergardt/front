@@ -3,7 +3,9 @@ import {trigger, state, style, transition, animate} from '@angular/animations';
 import {MdInput} from '@angular/material';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/skip';
-import {NgSwitch} from '@angular/common';
+import {InputService} from '../services/input.service';
+import {Subscription} from 'rxjs/Subscription';
+
 
 @Component({
   selector: 'app-header',
@@ -35,6 +37,9 @@ export class HeaderComponent implements AfterViewInit {
 
   value: string = '';
 
+  // searchBox: FormControl = new FormControl();
+  // subscription: Subscription;
+
   showSearch: boolean = false;
 
   @Input('debounce') debounce = 400;
@@ -52,19 +57,19 @@ export class HeaderComponent implements AfterViewInit {
   // @Output('selectedIndexChange') selectedIndexChange: EventEmitter<number> = new EventEmitter<number>();
 
 
-  constructor() {
+  constructor(private _inputService: InputService) {
   }
 
   ngAfterViewInit(): void {
-    if (this._searchInput) {
-
-      this._searchInput.ngControl.valueChanges
-        .debounceTime(this.debounce)
-        .subscribe((value: string) => {
-          console.log(value);
-          this.searchDebounce.emit(value);
-        });
-    }
+    // if (this._searchInput) {
+    //
+    //   this._searchInput.ngControl.valueChanges
+    //     .debounceTime(this.debounce)
+    //     .subscribe((value: string) => {
+    //       console.log('ngAfterViewInit say: value= ' + value);
+    //       this.searchDebounce.emit(value);
+    //     });
+    // }
   }
 
   handleBlur(): void {
@@ -76,13 +81,15 @@ export class HeaderComponent implements AfterViewInit {
   }
 
   handleSearch(event: Event): void {
+    console.log('event');
     this.stopPropagation(event);
     this.search.emit(this.value);
+    this._inputService.changeInput(this.value.toLowerCase());
   }
 
   clearSearch(): void {
     this.value = '';
     this.clear.emit(undefined);
+    this._inputService.changeInput(this.value.toLowerCase());
   }
-
 }

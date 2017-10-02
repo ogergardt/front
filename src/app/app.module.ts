@@ -15,9 +15,11 @@ import {RegisterComponent} from './register/register.component';
 import {AuthService} from './services/auth.service';
 import {AlertService} from './services/alert.service';
 import {JobService} from './services/job.service';
+import {InputService} from './services/input.service';
 import {AppRouting} from './app.routing';
 import {IconComponent} from './component/buttons/icon/icon.component';
 import {ContentComponent} from './content/content.component';
+import {SearchPipe} from './pipes/search.pipe';
 
 @NgModule({
   declarations: [
@@ -28,6 +30,7 @@ import {ContentComponent} from './content/content.component';
     RegisterComponent,
     IconComponent,
     ContentComponent,
+    SearchPipe,
   ],
   imports: [
     BrowserModule,
@@ -44,6 +47,7 @@ import {ContentComponent} from './content/content.component';
     AuthService,
     AlertService,
     JobService,
+    InputService,
   ],
   exports: [
     CommonModule,

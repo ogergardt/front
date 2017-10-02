@@ -6,7 +6,7 @@
   <span fxFlex fxFlexOffset="20px">LOGO</span>
 
   <div fxLayout="row" fxShow="false" fxShow.gt-sm>
-    <button md-button routerLink="/search">Search</button>
+    <button md-button routerLink="/search" (click)="showSearch = !showSearch">Search</button>
     <button md-button routerLink="/login">Sing in</button>
     <button md-button routerLink="/register">Sign up</button>
   </div>
