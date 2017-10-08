@@ -1,33 +1,34 @@
 <div class="content" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center">
 
-  <md-card elevation="5" fxFlex>
+  <mat-card elevation="5" fxFlex>
 
-    <md-card-subtitle>
+    <mat-card-subtitle>
       <h2>Angular4.x Spring Boot JWT</h2>
-    </md-card-subtitle>
+    </mat-card-subtitle>
 
-    <md-card-title>
+    <mat-card-title>
       <h2>{{title}}</h2>
-    </md-card-title>
+    </mat-card-title>
 
-    <md-card-content>
+    <mat-card-content>
 
       <form *ngIf="!submitted" [formGroup]="form" (ngSubmit)="onSubmit()" #loginForm="ngForm">
-        <md-input-container>
-          <input  mdInput formControlName="username" placeholder="Username">
-        </md-input-container>
-        <md-input-container>
-          <input mdInput formControlName="password" type="password" placeholder="Password">
-        </md-input-container>
-        <button type="submit" [disabled]="!loginForm.form.valid" md-raised-button>Login</button>
+        <mat-input-container>
+          <input matInput formControlName="username" placeholder="Username">
+        </mat-input-container>
+        <mat-input-container>
+          <input matInput formControlName="password" type="password" placeholder="Password">
+        </mat-input-container>
+        <button type="submit" [disabled]="!loginForm.form.valid" mat-raised-button>Login</button>
       </form>
 
-      <md-spinner *ngIf="submitted" mode="indeterminate"></md-spinner>
+      <mat-spinner *ngIf="submitted" mode="indeterminate"></mat-spinner>
 
       <br>
 
-    </md-card-content>
+    </mat-card-content>
 
-  </md-card>
+  </mat-card>
 
 </div>
+

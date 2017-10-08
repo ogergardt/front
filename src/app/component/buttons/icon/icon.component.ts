@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import { MdIconRegistry } from '@angular/material';
+import { MatIconRegistry } from '@angular/material';
 
 @Component({
   selector: 'app-icon',
@@ -9,7 +9,7 @@ import { MdIconRegistry } from '@angular/material';
 })
 export class IconComponent implements OnInit {
 
-  constructor(iconRegistry: MdIconRegistry, sanitizer: DomSanitizer) {
+  constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) {
     iconRegistry.addSvgIcon('letslookforjoblogo', sanitizer.bypassSecurityTrustResourceUrl('assets/img/job.svg'));
   }
 

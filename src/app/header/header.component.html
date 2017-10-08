@@ -1,55 +1,55 @@
-<md-toolbar *ngIf="!showSearch">
-  <button md-icon-button>
-    <md-icon>menu</md-icon>
+<mat-toolbar *ngIf="!showSearch">
+  <button mat-icon-button>
+    <mat-icon>menu</mat-icon>
   </button>
 
-  <span fxFlex fxFlexOffset="20px">LOGO</span>
+  <a fxFlex fxFlexOffset="20px" style="text-decoration:none" href="">LOGO</a>
 
   <div fxLayout="row" fxShow="false" fxShow.gt-sm>
-    <button md-button routerLink="/search" (click)="showSearch = !showSearch">Search</button>
-    <button md-button routerLink="/login">Sing in</button>
-    <button md-button routerLink="/register">Sign up</button>
+    <button mat-button routerLink="/search" (click)="showSearch = !showSearch">Search</button>
+    <button mat-button routerLink="/login">Sing in</button>
+    <button mat-button routerLink="/register">Sign up</button>
   </div>
 
-  <button md-icon-button
+  <button mat-icon-button
           aria-label="Search"
           (click)="showSearch = !showSearch"
           fxHide="false" fxHide.gt-sm>
-    <md-icon>search</md-icon>
+    <mat-icon>search</mat-icon>
   </button>
 
-  <button md-icon-button [mdMenuTriggerFor]="menu" fxHide="false" fxHide.gt-sm>
-    <md-icon>more_vert</md-icon>
+  <button mat-icon-button [matMenuTriggerFor]="menu" fxHide="false" fxHide.gt-sm>
+    <mat-icon>more_vert</mat-icon>
   </button>
-</md-toolbar>
+</mat-toolbar>
 
-<md-toolbar *ngIf="showSearch">
-  <button md-icon-button
+<mat-toolbar *ngIf="showSearch">
+  <button mat-icon-button
           aria-label="Back"
           (click)="showSearch = !showSearch">
-    <md-icon>arrow_back</md-icon>
+    <mat-icon>arrow_back</mat-icon>
   </button>
 
-  <md-form-field fxFlex>
-    <input mdInput
+  <mat-form-field fxFlex>
+    <input matInput
            type="text"
            [(ngModel)]="value"
            [placeholder]="placeholder"
            (blur)="handleBlur()"
            (search)="stopPropagation($event)"
-           (keyup.enter)="handleSearch($event)"/>
-  </md-form-field>
-  <button md-icon-button
+           (keyup)="handleSearch($event)"/>
+  </mat-form-field>
+  <button mat-icon-button
           aria-label="Cancel"
           [@searchState]="(value ? 'show' : 'hide-right')"
           (click)="clearSearch()">
-    <md-icon>cancel</md-icon>
+    <mat-icon>cancel</mat-icon>
   </button>
-</md-toolbar>
+</mat-toolbar>
 
-<md-menu #menu="mdMenu">
-  <button md-menu-item routerLink="/login">Sign in</button>
-  <button md-menu-item routerLink="/register">Sign up</button>
-</md-menu>
+<mat-menu #menu="matMenu">
+  <button mat-menu-item routerLink="/login">Sign in</button>
+  <button mat-menu-item routerLink="/register">Sign up</button>
+</mat-menu>
 
 

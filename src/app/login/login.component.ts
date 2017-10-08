@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AlertService } from '../services/alert.service';
-import { AuthService } from '../services/auth.service';
+import {Component, OnInit} from '@angular/core';
+import {Router, ActivatedRoute} from '@angular/router';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {AlertService} from '../services/alert.service';
+import {AuthService} from '../services/auth.service';
+import {IToken} from '../model/itoken.model';
 
 @Component({
   selector: 'app-login',
@@ -30,12 +31,12 @@ export class LoginComponent implements OnInit {
    */
   errorDiagnostic: string;
 
-  constructor(
-    private route: ActivatedRoute,
-    private router: Router,
-    private authService: AuthService,
-    private alertService: AlertService,
-    private formBuilder: FormBuilder) { }
+  constructor(private route: ActivatedRoute,
+              private router: Router,
+              private authService: AuthService,
+              private alertService: AlertService,
+              private formBuilder: FormBuilder) {
+  }
 
   ngOnInit() {
     // reset login status
@@ -52,10 +53,10 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     this.loading = true;
-     this.authService.login(this.form.value.username, this.form.value.password)
-     // this.authService.login(this.form.value)
+    this.authService.login(this.form.value.username, this.form.value.password)
       .subscribe(
-        data => {
+        (token: IToken) => {
+          localStorage.setItem('token', token.token);
           this.router.navigate([this.returnUrl]);
         },
         error => {

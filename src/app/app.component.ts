@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import {Component, Input} from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -8,8 +8,7 @@ import { Component, Input } from '@angular/core';
 export class AppComponent {
   event: Event;
 
-
   onSearch(value: string) {
-    console.log('the parent get value: ' + value);
+    console.log('app.component get a value: ' + value);
   }
 }

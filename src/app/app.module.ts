@@ -3,16 +3,14 @@ import {NgModule} from '@angular/core';
 import {MaterialModule} from './material/material.module';
 import {CommonModule} from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {HttpModule} from '@angular/http';
+import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-
 import {AppComponent} from './app.component';
 import {HeaderComponent} from './header/header.component';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {LoginComponent} from './login/login.component';
 import {HomeComponent} from './home/home.component';
 import {RegisterComponent} from './register/register.component';
-import {AuthService} from './services/auth.service';
 import {AlertService} from './services/alert.service';
 import {JobService} from './services/job.service';
 import {InputService} from './services/input.service';
@@ -20,6 +18,20 @@ import {AppRouting} from './app.routing';
 import {IconComponent} from './component/buttons/icon/icon.component';
 import {ContentComponent} from './content/content.component';
 import {SearchPipe} from './pipes/search.pipe';
+import {JwtModule, JWT_OPTIONS, JwtInterceptor} from '@auth0/angular-jwt';
+import {AuthService} from './services/auth.service';
+
+export function jwtOptionsFactory() {
+  return {
+    tokenGetter: () => {
+      return localStorage.getItem('token');
+    },
+    whitelistedDomains: ['localhost:8080', 'localhost:4200'],
+    authScheme: '',
+    throwNoTokenError: false,
+    skipWhenExpired: false
+  };
+}
 
 @NgModule({
   declarations: [
@@ -40,14 +52,20 @@ import {SearchPipe} from './pipes/search.pipe';
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    HttpModule,
+    HttpClientModule,
     AppRouting,
+    JwtModule.forRoot({
+      jwtOptionsProvider: {
+        provide: JWT_OPTIONS,
+        useFactory: jwtOptionsFactory
+      }
+    }),
   ],
   providers: [
-    AuthService,
     AlertService,
     JobService,
     InputService,
+    AuthService,
   ],
   exports: [
     CommonModule,

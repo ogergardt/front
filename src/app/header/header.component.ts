@@ -1,10 +1,12 @@
 import {Component, ViewChild, AfterViewInit, Input, Output, EventEmitter} from '@angular/core';
 import {trigger, state, style, transition, animate} from '@angular/animations';
-import {MdInput} from '@angular/material';
+import {MatInput} from '@angular/material';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/skip';
 import {InputService} from '../services/input.service';
+// import {Router} from '@angular/router';
 import {Subscription} from 'rxjs/Subscription';
+import {AuthService} from '../services/auth.service';
 
 
 @Component({
@@ -33,7 +35,7 @@ import {Subscription} from 'rxjs/Subscription';
 
 export class HeaderComponent implements AfterViewInit {
 
-  @ViewChild(MdInput) private _searchInput: MdInput;
+  @ViewChild(MatInput) private _searchInput: MatInput;
 
   value: string = '';
 
@@ -57,7 +59,7 @@ export class HeaderComponent implements AfterViewInit {
   // @Output('selectedIndexChange') selectedIndexChange: EventEmitter<number> = new EventEmitter<number>();
 
 
-  constructor(private _inputService: InputService) {
+  constructor(private _inputService: InputService, private _authService: AuthService) {
   }
 
   ngAfterViewInit(): void {
@@ -72,6 +74,10 @@ export class HeaderComponent implements AfterViewInit {
     // }
   }
 
+  isLoggedIn(): boolean {
+    return this._authService.isLoggedIn();
+  }
+
   handleBlur(): void {
     this.blur.emit(undefined);
   }
@@ -81,10 +87,9 @@ export class HeaderComponent implements AfterViewInit {
   }
 
   handleSearch(event: Event): void {
-    console.log('event');
     this.stopPropagation(event);
     this.search.emit(this.value);
-    this._inputService.changeInput(this.value.toLowerCase());
+    this._inputService.changeInput(this.value.trim().toLowerCase());
   }
 
   clearSearch(): void {

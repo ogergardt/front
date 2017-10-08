@@ -10,8 +10,7 @@ const appRoutes: Routes = [
 
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  // { path: '', component: HomeComponent },
-  { path: '', component: ContentComponent },
+  { path: '', component: HomeComponent },
   { path: 'search', component: ContentComponent },
 
   // otherwise redirect to home
