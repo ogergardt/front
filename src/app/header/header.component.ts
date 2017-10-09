@@ -1,11 +1,11 @@
-import {Component, ViewChild, AfterViewInit, Input, Output, EventEmitter} from '@angular/core';
+import {Component, ViewChild, AfterViewInit, Input, Output, EventEmitter, OnInit, OnDestroy} from '@angular/core';
 import {trigger, state, style, transition, animate} from '@angular/animations';
 import {MatInput} from '@angular/material';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/skip';
 import {InputService} from '../services/input.service';
 // import {Router} from '@angular/router';
-import {Subscription} from 'rxjs/Subscription';
+import { ISubscription } from 'rxjs/Subscription';
 import {AuthService} from '../services/auth.service';
 
 
@@ -33,16 +33,18 @@ import {AuthService} from '../services/auth.service';
   ],
 })
 
-export class HeaderComponent implements AfterViewInit {
+export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
 
   @ViewChild(MatInput) private _searchInput: MatInput;
 
   value: string = '';
 
   // searchBox: FormControl = new FormControl();
-  // subscription: Subscription;
+  private subscription: ISubscription;
 
-  showSearch: boolean = false;
+  public username: string = '';
+
+  public showSearch: boolean = false;
 
   @Input('debounce') debounce = 400;
 
@@ -62,20 +64,26 @@ export class HeaderComponent implements AfterViewInit {
   constructor(private _inputService: InputService, private _authService: AuthService) {
   }
 
-  ngAfterViewInit(): void {
-    // if (this._searchInput) {
-    //
-    //   this._searchInput.ngControl.valueChanges
-    //     .debounceTime(this.debounce)
-    //     .subscribe((value: string) => {
-    //       console.log('ngAfterViewInit say: value= ' + value);
-    //       this.searchDebounce.emit(value);
-    //     });
-    // }
+  ngOnInit(): void {
+
+    this.subscription = this._authService.getLoggedInName.subscribe(name => this.username = name);
+    this._authService.isLoggedIn();
   }
 
-  isLoggedIn(): boolean {
-    return this._authService.isLoggedIn();
+  ngAfterViewInit(): void {
+    if (this._searchInput) {
+
+      this._searchInput.ngControl.valueChanges
+        .debounceTime(this.debounce)
+        .subscribe((value: string) => {
+          console.log('ngAfterViewInit say: value= ' + value);
+          this.searchDebounce.emit(value);
+        });
+    }
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
   handleBlur(): void {

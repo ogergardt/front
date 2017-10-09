@@ -57,6 +57,7 @@ export class LoginComponent implements OnInit {
       .subscribe(
         (token: IToken) => {
           localStorage.setItem('token', token.token);
+          this.authService.getLoggedInName.emit(this.form.value.username);
           this.router.navigate([this.returnUrl]);
         },
         error => {

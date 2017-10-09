@@ -3,7 +3,7 @@ import {NgModule} from '@angular/core';
 import {MaterialModule} from './material/material.module';
 import {CommonModule} from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
+import {HttpClientModule} from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {AppComponent} from './app.component';
 import {HeaderComponent} from './header/header.component';
@@ -18,7 +18,7 @@ import {AppRouting} from './app.routing';
 import {IconComponent} from './component/buttons/icon/icon.component';
 import {ContentComponent} from './content/content.component';
 import {SearchPipe} from './pipes/search.pipe';
-import {JwtModule, JWT_OPTIONS, JwtInterceptor} from '@auth0/angular-jwt';
+import {JwtModule, JWT_OPTIONS} from '@auth0/angular-jwt';
 import {AuthService} from './services/auth.service';
 
 export function jwtOptionsFactory() {
