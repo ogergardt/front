@@ -1,7 +1,7 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {MaterialModule} from './material/material.module';
-import {CommonModule} from '@angular/common';
+import {CommonModule, PathLocationStrategy, LocationStrategy} from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -66,6 +66,7 @@ export function jwtOptionsFactory() {
     JobService,
     InputService,
     AuthService,
+    {provide: LocationStrategy, useClass: PathLocationStrategy}
   ],
   exports: [
     CommonModule,

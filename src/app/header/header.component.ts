@@ -5,8 +5,9 @@ import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/skip';
 import {InputService} from '../services/input.service';
 // import {Router} from '@angular/router';
-import { ISubscription } from 'rxjs/Subscription';
+import {ISubscription} from 'rxjs/Subscription';
 import {AuthService} from '../services/auth.service';
+import {LocationStrategy} from '@angular/common';
 
 
 @Component({
@@ -61,7 +62,7 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
   // @Output('selectedIndexChange') selectedIndexChange: EventEmitter<number> = new EventEmitter<number>();
 
 
-  constructor(private _inputService: InputService, private _authService: AuthService) {
+  constructor(private _inputService: InputService, private _authService: AuthService, private _location: LocationStrategy) {
   }
 
   ngOnInit(): void {
@@ -104,5 +105,10 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
     this.value = '';
     this.clear.emit(undefined);
     this._inputService.changeInput(this.value.toLowerCase());
+  }
+
+  back() {
+    this.showSearch = !this.showSearch;
+    this._location.back();
   }
 }

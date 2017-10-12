@@ -13,28 +13,30 @@
     <button mat-button>Hello, {{username}}</button>
   </div>
 
+  <div fxShow="true" fxHide.gt-sm>
   <button mat-icon-button
           aria-label="Search"
-          (click)="showSearch = !showSearch"
-          fxHide="false" fxHide.gt-sm>
+          (click)="showSearch = !showSearch">
     <mat-icon>search</mat-icon>
   </button>
-
-  <button mat-icon-button [matMenuTriggerFor]="menu" fxHide="false" fxHide.gt-sm>
+  <button mat-icon-button [matMenuTriggerFor]="menu">
     <mat-icon>more_vert</mat-icon>
   </button>
+  </div>
+
 </mat-toolbar>
 
 <mat-toolbar *ngIf="showSearch">
   <button mat-icon-button
           aria-label="Back"
-          (click)="showSearch = !showSearch">
+          (click)="back()">
     <mat-icon>arrow_back</mat-icon>
   </button>
 
   <mat-form-field fxFlex>
     <input matInput
            type="text"
+           title="search"
            [(ngModel)]="value"
            [placeholder]="placeholder"
            (blur)="handleBlur()"
