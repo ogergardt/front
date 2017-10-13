@@ -4,4 +4,5 @@ export interface IJob {
   who: string;
   when: string;
   notes: string;
+  like: boolean;
 }

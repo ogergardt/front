@@ -6,7 +6,9 @@
   <a fxFlex fxFlexOffset="20px" style="text-decoration:none" href="">LOGO</a>
 
   <div fxLayout="row" fxShow="false" fxShow.gt-sm>
-    <button mat-button routerLink="/search" (click)="showSearch = !showSearch">Search</button>
+    <button mat-button (click)="showSearch = !showSearch">Search</button>
+    <button mat-button [routerLink]="['/content', 'latest']">Latest</button>
+    <button mat-button [routerLink]="['/content', 'favorites']">Favorites</button>
     <button mat-button routerLink="/login">Sing in</button>
     <button mat-button routerLink="/register">Sign up</button>
     <button mat-button routerLink="/login">Sing out</button>
@@ -29,7 +31,7 @@
 <mat-toolbar *ngIf="showSearch">
   <button mat-icon-button
           aria-label="Back"
-          (click)="back()">
+          (click)="showSearch = !showSearch; clearSearch()">
     <mat-icon>arrow_back</mat-icon>
   </button>
 
