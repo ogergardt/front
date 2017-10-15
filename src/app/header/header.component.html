@@ -9,10 +9,9 @@
     <button mat-button (click)="showSearch = !showSearch">Search</button>
     <button mat-button [routerLink]="['/content', 'latest']">Latest</button>
     <button mat-button [routerLink]="['/content', 'favorites']">Favorites</button>
-    <button mat-button routerLink="/login">Sing in</button>
-    <button mat-button routerLink="/register">Sign up</button>
-    <button mat-button routerLink="/login">Sing out</button>
-    <button mat-button>Hello, {{username}}</button>
+    <button mat-button routerLink="/login">{{username ? 'Sign out' : 'Sign In'}}</button>
+    <button mat-button *ngIf="!username" routerLink="/register">Sign up</button>
+    <button mat-button *ngIf="username">Hello, {{username}}</button>
   </div>
 
   <div fxShow="true" fxHide.gt-sm>

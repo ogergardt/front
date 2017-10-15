@@ -41,7 +41,7 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
   // searchBox: FormControl = new FormControl();
   private subscription: ISubscription;
 
-  public username: string = '';
+  public username: string;
 
   public showSearch: boolean = false;
 
