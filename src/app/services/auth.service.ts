@@ -9,7 +9,7 @@ const URL: string = 'http://localhost:8080/api/auth/signin';
 
 @Injectable()
 export class AuthService {
-  @Output() getLoggedInName: EventEmitter<any> = new EventEmitter();
+  @Output() getLoggedInName: EventEmitter<string> = new EventEmitter<string>();
 
   constructor(private _http: HttpClient, private _jwtHelper: JwtHelperService) {
   }

@@ -4,6 +4,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AlertService} from '../services/alert.service';
 import {AuthService} from '../services/auth.service';
 import {IToken} from '../model/itoken.model';
+import {JwtHelperService} from '@auth0/angular-jwt';
 
 @Component({
   selector: 'app-login',
@@ -35,7 +36,8 @@ export class LoginComponent implements OnInit {
               private router: Router,
               private authService: AuthService,
               private alertService: AlertService,
-              private formBuilder: FormBuilder) {
+              private formBuilder: FormBuilder,
+              private jwtHelper: JwtHelperService) {
   }
 
   ngOnInit() {
@@ -57,7 +59,7 @@ export class LoginComponent implements OnInit {
       .subscribe(
         (token: IToken) => {
           localStorage.setItem('token', token.token);
-          this.authService.getLoggedInName.emit(this.form.value.username);
+           this.authService.getLoggedInName.emit(this.jwtHelper.decodeToken(token.token).sub);
           this.router.navigate([this.returnUrl]);
         },
         error => {
