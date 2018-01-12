@@ -5,7 +5,7 @@ import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import {IToken} from '../model/itoken.model';
 
-const URL: string = 'http://localhost:8080/api/auth/signin';
+const URL: string = '/api/auth/signin';
 
 @Injectable()
 export class AuthService {
@@ -15,7 +15,7 @@ export class AuthService {
   }
 
   public login(username: string, password: string): Observable<IToken> {
-    return this._http.post<IToken>('http://localhost:8080/api/auth/signin',
+    return this._http.post<IToken>('/api/auth/signin',
       JSON.stringify({username: username, password: password}),
       {headers: new HttpHeaders().append('Content-Type', 'application/json')});
   }
@@ -26,7 +26,7 @@ export class AuthService {
   }
 
   public register(username: string, email: string, password: string): Observable<IToken> {
-    return this._http.post<IToken>('http://localhost:8080/api/auth/signup',
+    return this._http.post<IToken>('/api/auth/signup',
       JSON.stringify({username: username, email: email, password: password}),
       {headers: new HttpHeaders().append('Content-Type', 'application/json')});
   }
@@ -53,7 +53,7 @@ export class AuthService {
 
   // I'm not using it now
   public ping() {
-    this._http.get('http://localhost:8080/api/whoami')
+    this._http.get('/api/whoami')
       .subscribe(
         data => console.log(data),
         err => console.log(err)

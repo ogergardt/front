@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
   loading = false;
   returnUrl: string;
 
-  title = 'Sign On';
+  title = 'Sign In';
   form: FormGroup;
 
   /**
@@ -64,7 +64,7 @@ export class LoginComponent implements OnInit {
         },
         error => {
           this.submitted = false;
-          this.title = 'Sign On';
+          this.title = 'Sign In';
           this.errorDiagnostic = 'Incorrect username or password.';
           this.alertService.error(error);
         });

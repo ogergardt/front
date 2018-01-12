@@ -1,0 +1,12 @@
+{
+  "/api/auth": {
+    "target":  {
+      "host": "ogergardt.me",
+      "protocol": "https:",
+      "port": 8443
+    },
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "info"
+  }
+}

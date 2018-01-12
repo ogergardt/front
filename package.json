@@ -4,7 +4,8 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --proxy-config proxy.conf.json",
+    "start": "ng serve --host 0.0.0.0 --disableHostCheck true --proxy-config proxy.conf.json",
+    "ssl": "ng serve --proxy-config proxySSL.conf.json --ssl 1 --ssl-key \"ssl/ssl.key\" --ssl-cert \"ssl/ssl.crt\" --host 0.0.0.0 --public-host https://ogergardt.me --port 8443 --live-reload 0",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
