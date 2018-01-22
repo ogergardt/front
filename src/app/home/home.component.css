@@ -1,0 +1,64 @@
+.rotate270 {
+  -webkit-transform: rotate(270deg);
+  -moz-transform: rotate(270deg);
+  -o-transform: rotate(270deg);
+  -ms-transform: rotate(270deg);
+  transform: rotate(270deg);
+}
+body {
+  font-family: 'Alegreya', serif;
+  font-size: 1.2em;
+  font-weight: 400;
+  width: 1000px;
+  margin: auto;
+  background: #FFFFFF;
+}
+h1 {
+  font-family: 'Alegreya Sans SC', sans-serif;
+  font-size: 2.0em;
+  font-weight: 800;
+  color: #757575;
+  text-align:center;
+  margin-bottom:15px;
+}
+h2 {
+  font-family: 'Alegreya Sans SC', sans-serif;
+  font-size: 1.6em;
+  font-weight: 700;
+  color: #397249;
+}
+.text-small {
+  font-family: 'Alegreya SC', serif;
+  font-size: 0.8em;
+}
+.column_1_2 {
+  float: left;
+  width: 49%;
+}
+/* Definitions */
+dt {
+  float: left;
+  clear: left;
+  width: 20%;
+}
+dd {
+  margin-left: 21%;
+  padding-bottom: 5px;
+}
+p {
+  margin-top:0;
+  margin-bottom:7px;
+}
+blockquote {
+  text-align: center
+}
+a {
+  text-decoration: none;
+  color: #397249;
+}
+hr {
+  color: #A6A6A6;
+}
+table {
+  width: 100%;
+}

@@ -5,8 +5,6 @@ import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import {IToken} from '../model/itoken.model';
 
-const URL: string = '/api/auth/signin';
-
 @Injectable()
 export class AuthService {
   @Output() getLoggedInName: EventEmitter<string> = new EventEmitter<string>();
