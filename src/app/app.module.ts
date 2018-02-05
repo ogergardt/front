@@ -27,7 +27,7 @@ export function jwtOptionsFactory() {
     tokenGetter: () => {
       return localStorage.getItem('token');
     },
-    whitelistedDomains: ['ogergardt.me', 'ogergardt.me:443', 'https://ogergardt.me'],
+    whitelistedDomains: ['ogergardt.me', 'ogergardt.me:8080'],
     authScheme: '',
     throwNoTokenError: false,
     skipWhenExpired: false
