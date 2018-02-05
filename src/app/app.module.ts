@@ -27,7 +27,7 @@ export function jwtOptionsFactory() {
     tokenGetter: () => {
       return localStorage.getItem('token');
     },
-    whitelistedDomains: ['localhost:8080', 'localhost:4200'],
+    whitelistedDomains: ['localhost'],
     authScheme: '',
     throwNoTokenError: false,
     skipWhenExpired: false

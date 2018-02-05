@@ -15,7 +15,8 @@ export class AuthService {
   public login(username: string, password: string): Observable<IToken> {
     return this._http.post<IToken>('/api/auth/signin',
       JSON.stringify({username: username, password: password}),
-      {headers: new HttpHeaders().append('Content-Type', 'application/json')});
+      {headers: new HttpHeaders().append('Content-Type', 'application/json')}
+      );
   }
 
   public logout(): void {
@@ -47,6 +48,10 @@ export class AuthService {
 
     this.getLoggedInName.emit(username);
     return true;
+  }
+
+  public getToken(): string {
+    return localStorage.getItem('token');
   }
 
   // I'm not using it now

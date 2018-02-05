@@ -3,12 +3,12 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
 import {IJob} from '../model/ijob.model';
 
-const URL: string = '/api/positions';
+const URL: string = '/api/jobs';
 
 @Injectable()
 export class JobService {
 
-  constructor(protected _http: HttpClient,) {
+  constructor(protected _http: HttpClient) {
   }
 
   public create(job: IJob): Observable<IJob> {

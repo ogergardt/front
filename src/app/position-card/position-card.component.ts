@@ -12,6 +12,7 @@ export class PositionCardComponent implements OnInit {
   @Input('position') position: IJob;
   @Input('activeLinkLabel') activeLinkLabel: string;
   @Output('like') like: EventEmitter<IJob> = new EventEmitter<IJob>();
+  @Output('cursor') cursor: EventEmitter<IJob> = new EventEmitter<IJob>();
 
   constructor() {
   }
@@ -21,6 +22,10 @@ export class PositionCardComponent implements OnInit {
 
   public handleLike(): void {
     this.like.emit(this.position);
+  }
+
+  public onItemClick(): void {
+    this.cursor.emit(this.position);
   }
 
 }

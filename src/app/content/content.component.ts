@@ -22,6 +22,7 @@ export class ContentComponent implements OnInit, OnDestroy {
   public routeLinks: string[] = ['All', 'Apple', 'HP', 'IBM'];
   public activeLinkIndex: number = 0;
   public activeLinkLabel: string = 'All';
+  public cursor: IJob;
 
   constructor(private _jobService: JobService, private _inputService: InputService, private _route: ActivatedRoute) {
   }
@@ -46,13 +47,13 @@ export class ContentComponent implements OnInit, OnDestroy {
 
   getPositions(): void {
     this.subscriptionPosition = this._jobService.list().subscribe(resp => {
-      this.positions = resp['data'];
+      // this.positions = resp['data'];
+       this.positions = resp;
     });
   }
 
   getSearchTerm(): void {
     this.subscriptionSearchTerm = this._inputService.getInput().subscribe(term => {
-      console.log('ContentComponent.getSearchTerm: term= ' + term);
       this.searchTerm = term;
     });
   }
@@ -60,10 +61,10 @@ export class ContentComponent implements OnInit, OnDestroy {
   onTabChange(index: number): void {
     this.activeLinkIndex = index;
     this.activeLinkLabel = this.routeLinks[index];
+    this.cursor = void(0);
   }
 
   public onLike(position: IJob): void {
-
     if (!this.favorites.get(position.id)) {
       this.favorites.set(position.id, position);
     } else {
@@ -76,4 +77,7 @@ export class ContentComponent implements OnInit, OnDestroy {
     return Array.from(this.favorites.values());
   }
 
+  public onChangeCursor(position: IJob): void {
+    this.cursor = position;
+  }
 }

@@ -1,15 +1,11 @@
-<mat-card *ngIf="(activeLinkLabel === 'All') || (position?.who === activeLinkLabel)">
-  <mat-card-header>
-    <div mat-card-avatar></div>
-    <mat-card-title>{{position?.what}}</mat-card-title>
-    <mat-card-subtitle>{{position?.who}}</mat-card-subtitle>
+<mat-card fxLayout="row" *ngIf="(activeLinkLabel === 'All') || (position?.company === activeLinkLabel)">
+  <mat-card-header fxFlex (click)="onItemClick()">
+    <img mat-card-avatar src="assets/img/{{position?.company}}.png"/>
+    <mat-card-title>{{position?.title}}</mat-card-title>
+    <mat-card-subtitle>{{position?.company}} - {{position?.location}}</mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>
-    <p>
-      {{position?.notes}}
-    </p>
-  </mat-card-content>
-  <mat-card-actions>
+    <p>{{position?.jobPosted}}</p>
     <button mat-button color="primary" (click)="handleLike()">{{(position?.like) ? 'UNLIKE' : 'LIKE'}}</button>
-  </mat-card-actions>
+  </mat-card-content>
 </mat-card>

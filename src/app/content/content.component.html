@@ -5,20 +5,40 @@
     </mat-tab>
   </mat-tab-group>
 </mat-toolbar>
-<h2>{{kind}}</h2>
+
 <div *ngIf="kind==='latest';then latest else favorites"></div>
 
 <ng-template #latest>
-  <div *ngFor="let position of positions | search: searchTerm">
-    <app-position-card [position]="position" [activeLinkLabel]="activeLinkLabel" (like)="onLike($event)"></app-position-card>
+  <div fxLayout="row">
+    <div>
+      <div *ngFor="let position of positions | search: searchTerm">
+        <app-position-card [position]="position" [activeLinkLabel]="activeLinkLabel"
+                           (like)="onLike($event)"
+                           (cursor)="onChangeCursor($event)">
+
+        </app-position-card>
+      </div>
+    </div>
+    <mat-card fxFlex>
+      <p [innerHTML]="cursor?.description"></p>
+    </mat-card>
   </div>
 </ng-template>
 
 <ng-template #favorites>
-  <div *ngFor="let position of getFavorites() | search: searchTerm">
-    <app-position-card [position]="position" [activeLinkLabel]="activeLinkLabel" (like)="onLike($event)"></app-position-card>
+  <div fxLayout="row">
+    <div>
+      <div *ngFor="let position of getFavorites() | search: searchTerm">
+        <app-position-card [position]="position" [activeLinkLabel]="activeLinkLabel"
+                           (like)="onLike($event)"
+                           (cursor)="onChangeCursor($event)">
+        </app-position-card>
+      </div>
+    </div>
+    <mat-card fxFlex>
+      <p [innerHTML]="cursor?.description"></p>
+    </mat-card>
   </div>
 </ng-template>
-
 
 
