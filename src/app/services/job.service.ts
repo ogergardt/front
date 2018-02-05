@@ -3,7 +3,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
 import {IJob} from '../model/ijob.model';
 
-const URL: string = 'http://ogergardt.me/api/jobs';
+const URL: string = '/api/jobs';
 
 @Injectable()
 export class JobService {
