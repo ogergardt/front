@@ -24,7 +24,7 @@ export class JobService {
   }
 
   public list(): Observable<Array<IJob>> {
-    return this._http.get<Array<IJob>>(URL);
+    return this._http.get<Array<IJob>>('/api/jobs');
   }
 
   public update(job: IJob): Observable<IJob> {
