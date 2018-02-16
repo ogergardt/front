@@ -19,7 +19,7 @@ export class ContentComponent implements OnInit, OnDestroy {
   public favorites = new Map();
   public subscriptionSearchTerm: Subscription;
   public searchTerm: string = '';
-  public routeLinks: string[] = ['All', 'Apple', 'HP', 'IBM'];
+  public routeLinks: string[] = ['All', 'Apple', 'Qualcomm'];
   public activeLinkIndex: number = 0;
   public activeLinkLabel: string = 'All';
   public cursor: IJob;
