@@ -1,4 +1,5 @@
-import {Component, OnInit, OnDestroy} from '@angular/core';
+import {
+  Component, OnInit, OnDestroy } from '@angular/core';
 import {JobService} from '../services/job.service';
 import {InputService} from '../services/input.service';
 import {IJob} from '../model/ijob.model';
@@ -28,6 +29,7 @@ export class ContentComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    console.log('ContentComponent.ngOnInit()');
     this.getKind();
     this.getPositions();
     this.getSearchTerm();
@@ -43,12 +45,12 @@ export class ContentComponent implements OnInit, OnDestroy {
     this.subscriptionKind = this._route.params.subscribe(params => {
       this.kind = params['kind'];
     });
+    console.log('getKind()');
   }
 
   getPositions(): void {
     this.subscriptionPosition = this._jobService.list().subscribe(resp => {
-      // this.positions = resp['data'];
-       this.positions = resp;
+      this.positions = resp;
     });
   }
 
@@ -59,9 +61,9 @@ export class ContentComponent implements OnInit, OnDestroy {
   }
 
   onTabChange(index: number): void {
+    console.log('onTabChange(' + index + ')');
     this.activeLinkIndex = index;
     this.activeLinkLabel = this.routeLinks[index];
-    this.cursor = void(0);
   }
 
   public onLike(position: IJob): void {

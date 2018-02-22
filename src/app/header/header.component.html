@@ -53,8 +53,10 @@
 </mat-toolbar>
 
 <mat-menu #menu="matMenu">
-  <button mat-menu-item routerLink="/login">Sign in</button>
-  <button mat-menu-item routerLink="/register">Sign up</button>
+  <button mat-menu-item *ngIf="username" [routerLink]="['/content', 'latest']">Latest</button>
+  <button mat-menu-item *ngIf="username" [routerLink]="['/content', 'favorites']">Favorites</button>
+  <button mat-menu-item routerLink="/login">{{username ? 'Sign out' : 'Sign In'}}</button>
+  <button mat-menu-item *ngIf="!username" routerLink="/register">Sign up</button>
 </mat-menu>
 
 

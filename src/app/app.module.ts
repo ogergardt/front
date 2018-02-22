@@ -21,6 +21,7 @@ import {SearchPipe} from './pipes/search.pipe';
 import {JwtModule, JWT_OPTIONS} from '@auth0/angular-jwt';
 import {AuthService} from './services/auth.service';
 import { PositionCardComponent } from './position-card/position-card.component';
+import { DetailCardComponent } from './detail-card/detail-card.component';
 
 export function jwtOptionsFactory() {
   return {
@@ -45,6 +46,7 @@ export function jwtOptionsFactory() {
     ContentComponent,
     SearchPipe,
     PositionCardComponent,
+    DetailCardComponent,
   ],
   imports: [
     BrowserModule,

@@ -4,7 +4,6 @@ import {MatInput} from '@angular/material';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/skip';
 import {InputService} from '../services/input.service';
-// import {Router} from '@angular/router';
 import {ISubscription} from 'rxjs/Subscription';
 import {AuthService} from '../services/auth.service';
 
@@ -38,7 +37,6 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
 
   value: string = '';
 
-  // searchBox: FormControl = new FormControl();
   private subscription: ISubscription;
 
   public username: string;

@@ -18,6 +18,7 @@ export class PositionCardComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log('position-card.ngOnInit()');
   }
 
   public handleLike(): void {
@@ -25,6 +26,7 @@ export class PositionCardComponent implements OnInit {
   }
 
   public onItemClick(): void {
+    console.log('sendposition: ' + this.position.title);
     this.cursor.emit(this.position);
   }
 
