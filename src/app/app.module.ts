@@ -22,6 +22,7 @@ import {JwtModule, JWT_OPTIONS} from '@auth0/angular-jwt';
 import {AuthService} from './services/auth.service';
 import { PositionCardComponent } from './position-card/position-card.component';
 import { DetailCardComponent } from './detail-card/detail-card.component';
+import {CursorService} from './services/cursor.service';
 
 export function jwtOptionsFactory() {
   return {
@@ -70,6 +71,7 @@ export function jwtOptionsFactory() {
     JobService,
     InputService,
     AuthService,
+    CursorService,
   ],
   exports: [
     CommonModule,

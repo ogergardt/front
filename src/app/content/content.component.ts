@@ -1,10 +1,12 @@
 import {
-  Component, OnInit, OnDestroy } from '@angular/core';
+  Component, OnInit, OnDestroy
+} from '@angular/core';
 import {JobService} from '../services/job.service';
 import {InputService} from '../services/input.service';
 import {IJob} from '../model/ijob.model';
 import {Subscription} from 'rxjs/Subscription';
 import {ActivatedRoute} from '@angular/router';
+import {CursorService} from '../services/cursor.service';
 
 @Component({
   selector: 'app-content',
@@ -23,9 +25,13 @@ export class ContentComponent implements OnInit, OnDestroy {
   public routeLinks: string[] = ['All', 'Apple', 'Qualcomm'];
   public activeLinkIndex: number = 0;
   public activeLinkLabel: string = 'All';
-  public cursor: IJob;
 
-  constructor(private _jobService: JobService, private _inputService: InputService, private _route: ActivatedRoute) {
+  // public cursor: IJob;
+
+  constructor(private _jobService: JobService,
+              private _inputService: InputService,
+              private _route: ActivatedRoute,
+              private _cursorService: CursorService) {
   }
 
   ngOnInit(): void {
@@ -51,6 +57,12 @@ export class ContentComponent implements OnInit, OnDestroy {
   getPositions(): void {
     this.subscriptionPosition = this._jobService.list().subscribe(resp => {
       this.positions = resp;
+
+      /*if (resp.length > 0) {
+        this.cursor = resp[0];
+      } else {
+        this.cursor = <IJob>{};
+      }*/
     });
   }
 
@@ -76,10 +88,16 @@ export class ContentComponent implements OnInit, OnDestroy {
   }
 
   public getFavorites(): IJob[] {
+    /*if (this.favorites.size > 0) {
+      this.cursor = this.favorites.values()[0];
+    } else {
+      this.cursor = <IJob>{};
+    }*/
     return Array.from(this.favorites.values());
   }
 
   public onChangeCursor(position: IJob): void {
-    this.cursor = position;
+    this._cursorService.cursor$.next(position);
+    // this.cursor = position;
   }
 }

@@ -12,12 +12,14 @@
   <div fxLayout="row">
     <div fxLayout="column">
       <app-position-card *ngFor="let p of positions | search: searchTerm"
-                         [position]="p" [activeLinkLabel]="activeLinkLabel"
+                         [position]="p"
+                         [activeLinkLabel]="activeLinkLabel"
                          (like)="onLike($event)"
                          (cursor)="onChangeCursor($event)">
       </app-position-card>
     </div>
-    <app-detail-card fxFlex [cursor]="cursor">
+    <!--<app-detail-card fxFlex [cursor]="cursor">-->
+    <app-detail-card fxFlex>
     </app-detail-card>
   </div>
 </ng-template>
@@ -26,12 +28,14 @@
   <div fxLayout="row">
     <div fxLayout="column">
       <app-position-card *ngFor="let p of getFavorites() | search: searchTerm"
-                         [position]="p" [activeLinkLabel]="activeLinkLabel"
+                         [position]="p"
+                         [activeLinkLabel]="activeLinkLabel"
                          (like)="onLike($event)"
                          (cursor)="onChangeCursor($event)">
       </app-position-card>
     </div>
-    <app-detail-card fxFlex [cursor]="cursor">
+    <!--<app-detail-card fxFlex [cursor]="cursor">-->
+    <app-detail-card fxFlex>
     </app-detail-card>
   </div>
 </ng-template>
