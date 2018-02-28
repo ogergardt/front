@@ -6,16 +6,16 @@
   <a fxFlex fxFlexOffset="20px" style="text-decoration:none" href="">LOGO</a>
 
   <div fxLayout="row" fxShow="false" fxShow.gt-sm>
-    <button mat-button (click)="showSearch = !showSearch">Search</button>
-    <button mat-button [routerLink]="['/content', 'latest']">Latest</button>
-    <button mat-button [routerLink]="['/content', 'favorites']">Favorites</button>
+    <button mat-button *ngIf="username" (click)="showSearch = !showSearch">Search</button>
+    <button mat-button *ngIf="username" [routerLink]="['/content', 'latest']">Latest</button>
+    <button mat-button *ngIf="username" [routerLink]="['/content', 'favorites']">Favorites</button>
     <button mat-button routerLink="/login">{{username ? 'Sign out' : 'Sign In'}}</button>
     <button mat-button *ngIf="!username" routerLink="/register">Sign up</button>
     <button mat-button *ngIf="username">Hello, {{username}}</button>
   </div>
 
   <div fxShow="true" fxHide.gt-sm>
-  <button mat-icon-button
+  <button *ngIf="username" mat-icon-button
           aria-label="Search"
           (click)="showSearch = !showSearch">
     <mat-icon>search</mat-icon>

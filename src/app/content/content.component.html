@@ -6,37 +6,35 @@
   </mat-tab-group>
 </mat-toolbar>
 
-<div *ngIf="kind==='latest';then latest else favorites"></div>
+<div fxLayout="row">
+  <div *ngIf="kind==='latest';then latest else favorites"></div>
+  <mat-card>
+    <p #cursor></p>
+  </mat-card>
+
+  <!--<app-detail-card fxFlex></app-detail-card>-->
+  <!--<app-detail-card fxFlex [cursor]="cursor">-->
+</div>
 
 <ng-template #latest>
-  <div fxLayout="row">
-    <div fxLayout="column">
-      <app-position-card *ngFor="let p of positions | search: searchTerm"
-                         [position]="p"
-                         [activeLinkLabel]="activeLinkLabel"
-                         (like)="onLike($event)"
-                         (cursor)="onChangeCursor($event)">
-      </app-position-card>
-    </div>
-    <!--<app-detail-card fxFlex [cursor]="cursor">-->
-    <app-detail-card fxFlex>
-    </app-detail-card>
+  <div fxLayout="column">
+    <app-position-card *ngFor="let p of positions | search: searchTerm"
+                       [position]="p"
+                       [activeLinkLabel]="activeLinkLabel"
+                       (like)="onLike($event)"
+                       (cursor)="onChangeCursor($event)">
+    </app-position-card>
   </div>
 </ng-template>
 
 <ng-template #favorites>
-  <div fxLayout="row">
-    <div fxLayout="column">
-      <app-position-card *ngFor="let p of getFavorites() | search: searchTerm"
-                         [position]="p"
-                         [activeLinkLabel]="activeLinkLabel"
-                         (like)="onLike($event)"
-                         (cursor)="onChangeCursor($event)">
-      </app-position-card>
-    </div>
-    <!--<app-detail-card fxFlex [cursor]="cursor">-->
-    <app-detail-card fxFlex>
-    </app-detail-card>
+  <div fxLayout="column">
+    <app-position-card *ngFor="let p of getFavorites() | search: searchTerm"
+                       [position]="p"
+                       [activeLinkLabel]="activeLinkLabel"
+                       (like)="onLike($event)"
+                       (cursor)="onChangeCursor($event)">
+    </app-position-card>
   </div>
 </ng-template>
 

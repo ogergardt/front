@@ -1,6 +1,7 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnChanges, OnInit} from '@angular/core';
 import {IJob} from '../model/ijob.model';
 import {CursorService} from '../services/cursor.service';
+import {Subscription} from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-detail-card',
@@ -15,12 +16,9 @@ export class DetailCardComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('DetailCardComponent.ngOnInit()');
-
     this._cursorService.cursor$.subscribe(c => {
-      console.log(c);
       this.cursor = c;
     });
+    console.log(this.cursor);
   }
-
 }

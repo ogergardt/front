@@ -1,5 +1,5 @@
 import {
-  Component, OnInit, OnDestroy
+  Component, OnInit, OnDestroy, ViewChild, ElementRef, AfterViewInit
 } from '@angular/core';
 import {JobService} from '../services/job.service';
 import {InputService} from '../services/input.service';
@@ -14,7 +14,7 @@ import {CursorService} from '../services/cursor.service';
   styleUrls: ['./content.component.css']
 })
 
-export class ContentComponent implements OnInit, OnDestroy {
+export class ContentComponent implements OnInit, OnDestroy, AfterViewInit {
   public kind: string;
   public subscriptionKind: Subscription;
   public subscriptionPosition: Subscription;
@@ -25,13 +25,18 @@ export class ContentComponent implements OnInit, OnDestroy {
   public routeLinks: string[] = ['All', 'Apple', 'Qualcomm'];
   public activeLinkIndex: number = 0;
   public activeLinkLabel: string = 'All';
+  @ViewChild('cursor') private cursorHTML: ElementRef;
 
   // public cursor: IJob;
 
   constructor(private _jobService: JobService,
               private _inputService: InputService,
               private _route: ActivatedRoute,
-              private _cursorService: CursorService) {
+              /*private _cursorService: CursorService*/) {
+  }
+
+  ngAfterViewInit() {
+      this.cursorHTML.nativeElement.innerHTML = '<h1>Hi</h1>';
   }
 
   ngOnInit(): void {
@@ -48,21 +53,15 @@ export class ContentComponent implements OnInit, OnDestroy {
   }
 
   getKind(): void {
+    console.log('getKind()');
     this.subscriptionKind = this._route.params.subscribe(params => {
       this.kind = params['kind'];
     });
-    console.log('getKind()');
   }
 
   getPositions(): void {
     this.subscriptionPosition = this._jobService.list().subscribe(resp => {
       this.positions = resp;
-
-      /*if (resp.length > 0) {
-        this.cursor = resp[0];
-      } else {
-        this.cursor = <IJob>{};
-      }*/
     });
   }
 
@@ -88,16 +87,13 @@ export class ContentComponent implements OnInit, OnDestroy {
   }
 
   public getFavorites(): IJob[] {
-    /*if (this.favorites.size > 0) {
-      this.cursor = this.favorites.values()[0];
-    } else {
-      this.cursor = <IJob>{};
-    }*/
     return Array.from(this.favorites.values());
   }
 
   public onChangeCursor(position: IJob): void {
-    this._cursorService.cursor$.next(position);
+    console.log('onChangeCursor()');
+    // this._cursorService.cursor$.next(position);
+    this.cursorHTML.nativeElement.innerHTML = position.description;
     // this.cursor = position;
   }
 }
