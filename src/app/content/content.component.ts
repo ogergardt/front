@@ -1,12 +1,12 @@
 import {
-  Component, OnInit, OnDestroy, ViewChild, ElementRef, AfterViewInit
+  Component, OnInit, OnDestroy, ViewChild, ElementRef, AfterViewInit, Inject, ViewChildren, QueryList, OnChanges
 } from '@angular/core';
 import {JobService} from '../services/job.service';
 import {InputService} from '../services/input.service';
 import {IJob} from '../model/ijob.model';
 import {Subscription} from 'rxjs/Subscription';
 import {ActivatedRoute} from '@angular/router';
-import {CursorService} from '../services/cursor.service';
+import {PositionCardComponent} from '../position-card/position-card.component';
 
 @Component({
   selector: 'app-content',
@@ -14,7 +14,7 @@ import {CursorService} from '../services/cursor.service';
   styleUrls: ['./content.component.css']
 })
 
-export class ContentComponent implements OnInit, OnDestroy, AfterViewInit {
+export class ContentComponent implements OnInit, OnDestroy, AfterViewInit, OnChanges {
   public kind: string;
   public subscriptionKind: Subscription;
   public subscriptionPosition: Subscription;
@@ -26,6 +26,7 @@ export class ContentComponent implements OnInit, OnDestroy, AfterViewInit {
   public activeLinkIndex: number = 0;
   public activeLinkLabel: string = 'All';
   @ViewChild('cursor') private cursorHTML: ElementRef;
+  @ViewChildren(PositionCardComponent) list: QueryList<PositionCardComponent>;
 
   // public cursor: IJob;
 
@@ -36,11 +37,25 @@ export class ContentComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngAfterViewInit() {
-      this.cursorHTML.nativeElement.innerHTML = '<h1>Hi</h1>';
+    this.list.changes.subscribe((r) => {
+      // console.log('activeLinkLabel: ' + this.activeLinkLabel);
+      // console.log(r);
+      const i: any = r._results.find(el => ((this.activeLinkLabel === 'All') || (el.position.company === this.activeLinkLabel)));
+      // console.log(i);
+      if (i) {
+        this.cursorHTML.nativeElement.innerHTML = i.position.description;
+      } else {
+        this.cursorHTML.nativeElement.innerHTML = '';
+      }
+    });
+  }
+
+  ngOnChanges() {
+    // console.log('ContentComponent.ngOnChanges()');
   }
 
   ngOnInit(): void {
-    console.log('ContentComponent.ngOnInit()');
+    // console.log('ContentComponent.ngOnInit()');
     this.getKind();
     this.getPositions();
     this.getSearchTerm();
@@ -53,7 +68,7 @@ export class ContentComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   getKind(): void {
-    console.log('getKind()');
+    // console.log('ContentComponent.getKind()');
     this.subscriptionKind = this._route.params.subscribe(params => {
       this.kind = params['kind'];
     });
@@ -72,9 +87,16 @@ export class ContentComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   onTabChange(index: number): void {
-    console.log('onTabChange(' + index + ')');
     this.activeLinkIndex = index;
     this.activeLinkLabel = this.routeLinks[index];
+    // console.log('onTabChange(' + index + ')   activeLinkIndex: ' + this.activeLinkIndex + '  activeLinkLabel: ' + this.activeLinkLabel);
+    // ToDo: simplify
+    if (this.list.find(el => (this.activeLinkLabel === 'All') || (el.position.company === this.activeLinkLabel))) {
+      this.cursorHTML.nativeElement.innerHTML =
+        this.list.find(el => (this.activeLinkLabel === 'All') || (el.position.company === this.activeLinkLabel)).position.description;
+    } else {
+      this.cursorHTML.nativeElement.innerHTML = '';
+    }
   }
 
   public onLike(position: IJob): void {
@@ -91,7 +113,7 @@ export class ContentComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   public onChangeCursor(position: IJob): void {
-    console.log('onChangeCursor()');
+    // console.log('ContentComponent.onChangeCursor(...)');
     // this._cursorService.cursor$.next(position);
     this.cursorHTML.nativeElement.innerHTML = position.description;
     // this.cursor = position;

@@ -73,7 +73,7 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
       this._searchInput.ngControl.valueChanges
         .debounceTime(this.debounce)
         .subscribe((value: string) => {
-          console.log('ngAfterViewInit say: value= ' + value);
+          // console.log('ngAfterViewInit say: value= ' + value);
           this.searchDebounce.emit(value);
         });
     }

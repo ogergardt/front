@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from '@angular/core';
 import {IJob} from '../model/ijob.model';
 
 
@@ -7,8 +7,7 @@ import {IJob} from '../model/ijob.model';
   templateUrl: './position-card.component.html',
   styleUrls: ['./position-card.component.css']
 })
-export class PositionCardComponent implements OnInit {
-
+export class PositionCardComponent implements OnInit, OnChanges {
   @Input('position') position: IJob;
   @Input('activeLinkLabel') activeLinkLabel: string;
   @Output('like') like: EventEmitter<IJob> = new EventEmitter<IJob>();
@@ -18,7 +17,11 @@ export class PositionCardComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('position-card.ngOnInit()');
+    // console.log('position-card.ngOnInit()');
+  }
+
+  ngOnChanges() {
+    // console.log('position-card.ngOnChanges()');
   }
 
   public handleLike(): void {
@@ -26,7 +29,7 @@ export class PositionCardComponent implements OnInit {
   }
 
   public onItemClick(): void {
-    console.log('sendposition: ' + this.position.title);
+    // console.log('sendposition: ' + this.position.title);
     this.cursor.emit(this.position);
   }
 

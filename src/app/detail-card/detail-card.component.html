@@ -1,3 +1,3 @@
-<mat-card *ngIf="cursor.description">
+<mat-card *ngIf="cursor.description.length > 0">
   <p [innerHTML]="cursor?.description"></p>
 </mat-card>

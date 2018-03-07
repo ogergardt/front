@@ -6,12 +6,11 @@
   </mat-tab-group>
 </mat-toolbar>
 
-<div fxLayout="row">
+<div fxShow="false" fxShow.gt-sm fxLayout="row">
   <div *ngIf="kind==='latest';then latest else favorites"></div>
-  <mat-card>
-    <p #cursor></p>
-  </mat-card>
-
+  <!--<mat-card>-->
+  <div #cursor></div>
+  <!--</mat-card>-->
   <!--<app-detail-card fxFlex></app-detail-card>-->
   <!--<app-detail-card fxFlex [cursor]="cursor">-->
 </div>

@@ -19,6 +19,6 @@ export class DetailCardComponent implements OnInit {
     this._cursorService.cursor$.subscribe(c => {
       this.cursor = c;
     });
-    console.log(this.cursor);
+    // console.log(this.cursor);
   }
 }
