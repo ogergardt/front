@@ -6,14 +6,30 @@
   </mat-tab-group>
 </mat-toolbar>
 
-<div fxShow="false" fxShow.gt-sm fxLayout="row">
-  <div *ngIf="kind==='latest';then latest else favorites"></div>
-  <!--<mat-card>-->
-  <div #cursor></div>
-  <!--</mat-card>-->
-  <!--<app-detail-card fxFlex></app-detail-card>-->
-  <!--<app-detail-card fxFlex [cursor]="cursor">-->
+<div fxLayout="column" style="min-height:98vh;width:100%">
+  <mat-sidenav-container fxFlex>
+    <mat-sidenav-content>
+      <div *ngIf="kind==='latest';then latest else favorites"></div>
+    </mat-sidenav-content>
+
+    <mat-sidenav #sidenav align="end" mode="over" opened="false">
+      <button mat-icon-button
+              aria-label="Back"
+              (click)="sidenav.toggle()">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+      <div #cursor></div>
+    </mat-sidenav>
+  </mat-sidenav-container>
 </div>
+<!--
+  <div fxLayout="row" fxShow="false" fxShow.gt-sm>
+    <div *ngIf="kind==='latest';then latest else favorites"></div>
+    <div #cursor></div>
+  </div>
+-->
+
+<!--fxShow="false" fxShow.gt-sm  - hide if mobile -->
 
 <ng-template #latest>
   <div fxLayout="column">
@@ -21,7 +37,7 @@
                        [position]="p"
                        [activeLinkLabel]="activeLinkLabel"
                        (like)="onLike($event)"
-                       (cursor)="onChangeCursor($event)">
+                       (cursor)="onChangeCursor($event);sidenav.toggle()">
     </app-position-card>
   </div>
 </ng-template>
@@ -32,9 +48,10 @@
                        [position]="p"
                        [activeLinkLabel]="activeLinkLabel"
                        (like)="onLike($event)"
-                       (cursor)="onChangeCursor($event)">
+                       (cursor)="onChangeCursor($event);sidenav.toggle()">
     </app-position-card>
   </div>
 </ng-template>
+
 
 

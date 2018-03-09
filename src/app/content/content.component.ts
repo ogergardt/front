@@ -28,6 +28,7 @@ export class ContentComponent implements OnInit, OnDestroy, AfterViewInit, OnCha
   @ViewChild('cursor') private cursorHTML: ElementRef;
   @ViewChildren(PositionCardComponent) list: QueryList<PositionCardComponent>;
 
+
   // public cursor: IJob;
 
   constructor(private _jobService: JobService,
