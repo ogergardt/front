@@ -1,14 +1,15 @@
-<mat-toolbar>
-  <mat-tab-group mat-stretch-tabs fxFlex [(selectedIndex)]="activeLinkIndex"
-                 (selectedIndexChange)="onTabChange($event)">
-    <mat-tab *ngFor="let routeLink of routeLinks" [label]="routeLink">
-    </mat-tab>
-  </mat-tab-group>
-</mat-toolbar>
-
 <div fxLayout="column" style="min-height:98vh;width:100%">
   <mat-sidenav-container fxFlex>
     <mat-sidenav-content>
+
+      <mat-toolbar>
+        <mat-tab-group mat-stretch-tabs fxFlex [(selectedIndex)]="activeLinkIndex"
+                       (selectedIndexChange)="onTabChange($event)">
+          <mat-tab *ngFor="let routeLink of routeLinks" [label]="routeLink">
+          </mat-tab>
+        </mat-tab-group>
+      </mat-toolbar>
+
       <div *ngIf="kind==='latest';then latest else favorites"></div>
     </mat-sidenav-content>
 
