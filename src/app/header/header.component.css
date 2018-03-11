@@ -3,6 +3,9 @@
   /*text-transform: uppercase !important;*/
 /*}*/
 
+mat-toolbar {
+  height: 64px;
+}
 
 
 
