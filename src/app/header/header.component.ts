@@ -6,6 +6,7 @@ import 'rxjs/add/operator/skip';
 import {InputService} from '../services/input.service';
 import {ISubscription} from 'rxjs/Subscription';
 import {AuthService} from '../services/auth.service';
+import {ActivatedRoute, Router, UrlSegment} from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -15,11 +16,11 @@ import {AuthService} from '../services/auth.service';
     trigger('searchState', [
       state('hide-left', style({
         transform: 'translateX(-150%)',
-        display: 'none',
+        visibility: 'hidden',
       })),
       state('hide-right', style({
         transform: 'translateX(150%)',
-        display: 'none',
+        visibility: 'hidden',
       })),
       state('show', style({
         transform: 'translateX(0%)',
@@ -45,8 +46,6 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
 
   @Input('debounce') debounce = 400;
 
-  @Input('placeholder') placeholder: string;
-
   @Output('searchDebounce') searchDebounce: EventEmitter<string> = new EventEmitter<string>();
 
   @Output('search') search: EventEmitter<string> = new EventEmitter<string>();
@@ -62,9 +61,10 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnInit(): void {
-
     this.subscription = this._authService.getLoggedInName.subscribe(name => this.username = name);
     this._authService.isLoggedIn();
+    this._inputService.getInput().subscribe(v => this.value = v);
+
   }
 
   ngAfterViewInit(): void {
@@ -101,5 +101,6 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
     this.value = '';
     this.clear.emit(undefined);
     this._inputService.changeInput(this.value.toLowerCase());
+    // this.showSearch = !this.showSearch;
   }
 }

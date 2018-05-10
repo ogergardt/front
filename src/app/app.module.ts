@@ -23,6 +23,8 @@ import {AuthService} from './services/auth.service';
 import { PositionCardComponent } from './position-card/position-card.component';
 import { DetailCardComponent } from './detail-card/detail-card.component';
 import {CursorService} from './services/cursor.service';
+import { BoldPipe } from './pipes/bold.pipe';
+import { SearchComponent } from './search/search.component';
 
 export function jwtOptionsFactory() {
   return {
@@ -48,6 +50,8 @@ export function jwtOptionsFactory() {
     SearchPipe,
     PositionCardComponent,
     DetailCardComponent,
+    BoldPipe,
+    SearchComponent,
   ],
   imports: [
     BrowserModule,

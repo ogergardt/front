@@ -1,21 +1,15 @@
-import { Component, NgModule, OnInit } from '@angular/core';
-
-import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {AfterViewInit, Component, ElementRef, OnInit, Renderer, ViewChild} from '@angular/core';
 
 // flex-layout
-import { FlexLayoutModule } from '@angular/flex-layout';
-import { ObservableMedia } from '@angular/flex-layout';
-
-// material
-import { MatGridListModule } from '@angular/material';
+import {ObservableMedia} from '@angular/flex-layout';
 
 // rxjs
-import { Observable } from 'rxjs/Observable';
+import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/takeWhile';
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/of';
+import {InputService} from '../services/input.service';
 
 @Component({
   selector: 'app-home',
@@ -25,8 +19,11 @@ import 'rxjs/add/observable/of';
 export class HomeComponent implements OnInit {
 
   public cols: Observable<number>;
+  value: string = '';
 
-  constructor(private observableMedia: ObservableMedia) {}
+
+  constructor(private observableMedia: ObservableMedia) {
+  }
 
   ngOnInit() {
     const grid = new Map([
@@ -39,6 +36,7 @@ export class HomeComponent implements OnInit {
     let start: number;
     grid.forEach((cols, mqAlias) => {
       if (this.observableMedia.isActive(mqAlias)) {
+        // console.log('mqAlias: ' + mqAlias);
         start = cols;
       }
     });

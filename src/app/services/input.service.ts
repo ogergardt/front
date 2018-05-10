@@ -15,5 +15,4 @@ export class InputService {
   getInput(): Observable<string> {
     return this.inputSubject$.asObservable();
   }
-
 }

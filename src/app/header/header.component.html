@@ -3,15 +3,51 @@
     <mat-icon>menu</mat-icon>
   </button>
 
-  <a fxFlex fxFlexOffset="20px" style="text-decoration:none" href="">LOGO</a>
+  <a fxFlexOffset="20px" style="text-decoration:none" href="">LOGO</a>
+  <!--<a fxFlex xFlexOffset="20px" style="text-decoration:none" href="">LOGO</a>-->
+  <div fxFlex fxShow="true" fxHide.gt-sm></div>
+<!--
+  <mat-form-field fxFlex fxFlexOffset="20px" fxShow="false" fxShow.gt-sm>
+    <input matInput fxFlex
+           type="text"
+           title="search"
+           [(ngModel)]="value"
+           [placeholder]="placeholder"
+           (blur)="handleBlur()"
+           (search)="stopPropagation($event)"
+           (keyup)="handleSearch($event)"/>
+  </mat-form-field>
+  <button mat-icon-button
+          aria-label="Cancel"
+          [@searchState]="(value ? 'show' : 'hide-right')"
+          (click)="clearSearch()">
+    <mat-icon>cancel</mat-icon>
+  </button>
+-->
+  <input type="text"
+         title="search"
+         [(ngModel)]="value"
+         (keyup)="handleSearch($event)"
+         id="large-search"
+         class="mat-elevation-z2"
+         fxFlex fxFlexOffset="20px"
+         fxShow="false" fxShow.gt-sm/>
+  <button mat-icon-button
+          aria-label="Cancel"
+          [@searchState]="(value ? 'show' : 'hide-right')"
+          (click)="clearSearch()"
+          fxShow="false" fxShow.gt-sm>
+    <mat-icon>cancel</mat-icon>
+  </button>
+
 
   <div fxLayout="row" fxShow="false" fxShow.gt-sm>
-    <button mat-button *ngIf="username" (click)="showSearch = !showSearch">Search</button>
-    <button mat-button *ngIf="username" [routerLink]="['/content', 'latest']">Latest</button>
-    <button mat-button *ngIf="username" [routerLink]="['/content', 'favorites']">Favorites</button>
+    <!--<button mat-button *ngIf="username" (click)="showSearch = !showSearch">Search</button>-->
+    <button mat-button *ngIf="username" [routerLink]="['/content', 'latest']">All Jobs</button>
+    <button mat-button *ngIf="username" [routerLink]="['/content', 'favorites']">Saved Jobs</button>
+    <button mat-button *ngIf="username">Hello, {{username}}</button>
     <button mat-button routerLink="/login">{{username ? 'Sign out' : 'Sign In'}}</button>
     <button mat-button *ngIf="!username" routerLink="/register">Sign up</button>
-    <button mat-button *ngIf="username">Hello, {{username}}</button>
   </div>
 
   <div fxShow="true" fxHide.gt-sm>
@@ -39,7 +75,6 @@
            type="text"
            title="search"
            [(ngModel)]="value"
-           [placeholder]="placeholder"
            (blur)="handleBlur()"
            (search)="stopPropagation($event)"
            (keyup)="handleSearch($event)"/>
@@ -53,8 +88,8 @@
 </mat-toolbar>
 
 <mat-menu #menu="matMenu">
-  <button mat-menu-item *ngIf="username" [routerLink]="['/content', 'latest']">Latest</button>
-  <button mat-menu-item *ngIf="username" [routerLink]="['/content', 'favorites']">Favorites</button>
+  <button mat-menu-item *ngIf="username" [routerLink]="['/content', 'latest']">All Jobs</button>
+  <button mat-menu-item *ngIf="username" [routerLink]="['/content', 'favorites']">Saved Jobs</button>
   <button mat-menu-item routerLink="/login">{{username ? 'Sign out' : 'Sign In'}}</button>
   <button mat-menu-item *ngIf="!username" routerLink="/register">Sign up</button>
 </mat-menu>

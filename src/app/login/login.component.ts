@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {AlertService} from '../services/alert.service';
 import {AuthService} from '../services/auth.service';
 import {IToken} from '../model/itoken.model';
