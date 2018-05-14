@@ -1,8 +1,8 @@
 import {Injectable, Output, EventEmitter} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {JwtHelperService} from '@auth0/angular-jwt';
-import {Observable} from 'rxjs/Observable';
-import 'rxjs/add/operator/map';
+import {Observable} from 'rxjs';
+
 import {IToken} from '../model/itoken.model';
 
 @Injectable()

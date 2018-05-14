@@ -1,10 +1,12 @@
+
+import {debounceTime} from 'rxjs/operators';
 import {Component, ViewChild, AfterViewInit, Input, Output, EventEmitter, OnInit, OnDestroy} from '@angular/core';
 import {trigger, state, style, transition, animate} from '@angular/animations';
 import {MatInput} from '@angular/material';
-import 'rxjs/add/operator/debounceTime';
-import 'rxjs/add/operator/skip';
+
+
 import {InputService} from '../services/input.service';
-import {ISubscription} from 'rxjs/Subscription';
+import {SubscriptionLike as ISubscription} from 'rxjs';
 import {AuthService} from '../services/auth.service';
 import {ActivatedRoute, Router, UrlSegment} from '@angular/router';
 
@@ -44,7 +46,7 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
 
   public showSearch: boolean = false;
 
-  @Input('debounce') debounce = 400;
+  @Input() debounce = 400;
 
   @Output('searchDebounce') searchDebounce: EventEmitter<string> = new EventEmitter<string>();
 
@@ -70,8 +72,8 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
   ngAfterViewInit(): void {
     if (this._searchInput) {
 
-      this._searchInput.ngControl.valueChanges
-        .debounceTime(this.debounce)
+      this._searchInput.ngControl.valueChanges.pipe(
+        debounceTime(this.debounce))
         .subscribe((value: string) => {
           // console.log('ngAfterViewInit say: value= ' + value);
           this.searchDebounce.emit(value);

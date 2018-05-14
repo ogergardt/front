@@ -1,14 +1,9 @@
-import {AfterViewInit, Component, ElementRef, OnInit, Renderer, ViewChild} from '@angular/core';
-
-// flex-layout
+import {startWith, map} from 'rxjs/operators';
+import {Component, OnInit} from '@angular/core';
 import {ObservableMedia} from '@angular/flex-layout';
+import {Observable} from 'rxjs';
 
-// rxjs
-import {Observable} from 'rxjs/Observable';
-import 'rxjs/add/operator/takeWhile';
-import 'rxjs/add/operator/startWith';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/observable/of';
+
 import {InputService} from '../services/input.service';
 
 @Component({
@@ -40,8 +35,8 @@ export class HomeComponent implements OnInit {
         start = cols;
       }
     });
-    this.cols = this.observableMedia.asObservable()
-      .map(change => grid.get(change.mqAlias))
-      .startWith(start);
+    this.cols = this.observableMedia.asObservable().pipe(
+      map(change => grid.get(change.mqAlias)),
+      startWith(start),);
   }
 }

@@ -4,7 +4,7 @@ import {
 import {JobService} from '../services/job.service';
 import {InputService} from '../services/input.service';
 import {IJob} from '../model/ijob.model';
-import {Subscription} from 'rxjs/Subscription';
+import {Subscription} from 'rxjs';
 import {ActivatedRoute} from '@angular/router';
 import {PositionCardComponent} from '../position-card/position-card.component';
 
